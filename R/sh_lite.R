@@ -3,25 +3,25 @@
 # 11-2-2020
 
 sh_lite <- function(input, check.na = T, ocr = T){
-  
+
   # Read input
   df <- read.csv2(input, row.names=1)
-  
+
   # Define variables
   wells <- length(df)
   names_df <- names(df)
   excl <- c()
   col_na <- c()
   excl_wells <- vector("list", wells)
-  
+
   # Fill list ####
   for(i in 1:wells){
     excl_wells[[i]]<-0
   }
-  
+
   # Define df2 ----
   if(ocr == T){
-    df2 <- df[c(1:3,7:9),]  
+    df2 <- df[c(1:3,7:9),]
     }else if(ocr == F){
       df2 <- df[c(1:6),]
       }else{
@@ -43,24 +43,24 @@ sh_lite <- function(input, check.na = T, ocr = T){
       stop("After removing all negative values, there were less than three viable wells available for all measurements.
            Maybe the assay went wrong for this group? Please consider rerunning the analysis with check.na = F")
     }
-    
+
   }
-  
+
   # Calculate mean and standard error ----
   for(measurement in 1:nrow(df2)){
-    
+
     # Reset values
     err_up <- NULL
     err_down <- NULL
-    
+
     # Calculate mean and sd
     means <- (mean(as.numeric(df2[measurement,]), na.rm = T))
     sd <- (sd(as.numeric(df2[measurement,]), na.rm = T))
-    
+
     # Calculate range
     err_up <- means + sd
     err_down <- means - sd
-    
+
     # Iterate over all values to see if they fit
     for(value in df2[measurement,]){
       if(!is.na(value)){
@@ -73,9 +73,9 @@ sh_lite <- function(input, check.na = T, ocr = T){
         }
       }
     }
-    
+
   }
-  
+
   # Print out negative values that were excluded ----
   if(check.na == T){
     if(length(excl) > 0){
@@ -86,6 +86,6 @@ sh_lite <- function(input, check.na = T, ocr = T){
   # Print out excluded wells due to high/low divergence
   #excl_wells<-excl_wells[excl_wells >= treshhold] WORK IN PROGRESS
   cat("Here is an overview for all wells and how often they
-    diplayed some sort of divergence from the mean +- sd: ")
+    displayed some sort of divergence from the mean +- sd: ")
   do.call(cat, excl_wells)
 }
