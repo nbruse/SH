@@ -1,11 +1,10 @@
 Package: SHlite
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Advises the user on the quality of Seahorse data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Niklas Bruse
+Maintainer: Niklas Bruse <Niklas.Bruse@radboudumc.nl>
+Description: The main function sh_lite() gives an overview of how often each well within the dataset deviates from the mean +- sd of the measurement.
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
