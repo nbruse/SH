@@ -86,6 +86,7 @@ sh_lite <- function(input, check.na = T, ocr = T){
   # Print out excluded wells due to high/low divergence
   #excl_wells<-excl_wells[excl_wells >= treshhold] WORK IN PROGRESS
   cat("Here is an overview for all wells and how often they
-    displayed some sort of divergence from the mean +- sd: ")
-  do.call(cat, excl_wells)
+    displayed some sort of divergence from the mean +- sd: \n\n")
+  cat("\t", colnames(df2), "\n")
+  do.call(cat, c("\t", excl_wells))
 }
