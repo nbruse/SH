@@ -46,6 +46,16 @@ sh_lite <- function(input, check.na = T, ocr = T){
 
   }
 
+  # Log transform df2 --- DAS FUNKTIONIERT NOCH NET
+  if(check.na == T){
+    df2[, !colSums(is.na(df2))]<-log2(df2[, !colSums(is.na(df2))])
+  } else if(check.na == F){
+    df2 <- df2 + 1000
+    df2 <- log2(df2)
+  } else {
+    stop("Something went wrong. Maybe one of your values is more than -1000?")
+  }
+
   # Calculate mean and standard error ----
   for(measurement in 1:nrow(df2)){
 
