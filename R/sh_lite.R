@@ -38,6 +38,9 @@ sh_lite <- function(input, check.na = T, ocr = T){
         }
       }
     }
+
+    # Turn all columns with a negative value to NA and check if there are
+    # still sufficient colums (3) present
     df2[,col_na] <- NA
     if(sum(!is.na(df2[1,])) < 3){
       stop("After removing all negative values, there were less than three viable wells available for all measurements.
@@ -91,10 +94,16 @@ sh_lite <- function(input, check.na = T, ocr = T){
           analysis due to negative values: ", excl, "\n\n")
     }
   }
+
   # Print out excluded wells due to high/low divergence
   #excl_wells<-excl_wells[excl_wells >= treshhold] WORK IN PROGRESS
   cat("Here is an overview for all wells and how often they
     displayed some sort of divergence from the mean +- sd: \n\n")
-  cat("\t", colnames(df2), "\n")
+  cat("\t", colnames(df2)[colSums(is.na(df2)) == 0], "\n")
+
+  # Only use the wells that are not NA
+  excl_wells <- excl_wells[colSums(is.na(df2)) == 0]
+
+  # Print overview of wells not containing NA and their quality
   do.call(cat, c("\t", excl_wells))
 }
