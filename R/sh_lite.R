@@ -98,7 +98,7 @@ sh_lite <- function(input, check.na = T, ocr = T){
   # Print out excluded wells due to high/low divergence
   #excl_wells<-excl_wells[excl_wells >= treshhold] WORK IN PROGRESS
   cat("Here is an overview for all wells and how often they
-    displayed some sort of divergence from the mean +- sd: \n\n")
+    display some sort of divergence from the mean +- sd: \n\n")
   cat("\t", colnames(df2)[colSums(is.na(df2)) == 0], "\n")
 
   # Only use the wells that are not NA
