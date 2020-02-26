@@ -94,7 +94,7 @@ sh_lite <- function(input, check.na = T, ocr = T){
           analysis due to negative values: ", excl, "\n\n")
     }
   }
-
+  str(df2)
   # Print out excluded wells due to high/low divergence
   #excl_wells<-excl_wells[excl_wells >= treshhold] WORK IN PROGRESS
   cat("Here is an overview for all wells and how often they
