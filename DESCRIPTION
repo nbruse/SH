@@ -1,10 +1,10 @@
 Package: SHlite
 Type: Package
 Title: Advises the user on the quality of Seahorse data
-Version: 0.1.0
+Version: 1.0.0
 Author: Niklas Bruse
 Maintainer: Niklas Bruse <Niklas.Bruse@radboudumc.nl>
-Description: The main function sh_lite() gives an overview of how often each well within the dataset deviates from the mean +- sd of the measurement.
+Description: The main function sh_full() gives an overview of how often each well within the dataset deviates from the mean +- sd of the measurement.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
