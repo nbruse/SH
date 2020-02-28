@@ -2,7 +2,7 @@
 \alias{sh_full}
 \title{Seahorse Full function}
 \usage{
-sh_lite(input, check.na = T, ocr = T)
+sh_full(input, check.na = T, ocr = T)
 }
 \arguments{
   \item{input}{A .csv file containing all measurements for all wells of this group.}
