@@ -1,2 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("utils", "read.csv2")
+importFrom("utils", "capture.output", "read.csv2", "str")
