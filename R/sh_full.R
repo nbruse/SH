@@ -1,8 +1,13 @@
 # Script SH_full
 # Niklas Bruse
-# 26-2-2020
+# 03-03-2020
 
-sh_full <- function(input, check.na = T, ocr = T){
+sh_full <- function(input,
+                    check.min = T,
+                    assay = "ms",
+                    save.out = F,
+                    custom,
+                    save.name = "output.txt"){
 
   df_input<-read.csv2(input, header = F, row.names = 1, stringsAsFactors = F)
 
@@ -44,16 +49,22 @@ sh_full <- function(input, check.na = T, ocr = T){
     }
 
     # Define df2 ####
-    if(ocr == T){
+    if(assay == "ms"){
       df2 <- df[c(1:3,7:9),]
-    }else if(ocr == F){
-      df2 <- df[c(1:6),]
+    }else if(assay == "gs"){
+      df2 <- df[c(4:9),]
+    }else if(assay == "custom"){
+      if(is.numeric(custom) == T){
+        df2 <- df[custom,]
+      }else{
+        stop("Please make sure to supply a numeric vector for the custom variable.")
+      }
     }else{
-      stop("The ocr argument has to be either T or F (for ECAR).")
+      stop("Please make sure to choose either 'ms', 'gs' or 'custom'.")
     }
 
     # Check for NAs ####
-    if(check.na == T){
+    if(check.min == T){
       for(j in 1:nrow(df2)){
         for(k in 1:ncol(df2)){
           if(df2[j,k] < 0){
@@ -65,17 +76,17 @@ sh_full <- function(input, check.na = T, ocr = T){
 
       # Turn all columns with a negative value to NA and check if there are
       # still sufficient colums (3) present
-      df2[,col_na] <- NA
+      df2[,unique(col_na)] <- NA
       if(sum(!is.na(df2[1,])) < 3){
         stop("After removing all negative values, there were less than three viable wells available for all measurements.
-           Maybe the assay went wrong for this group? Please consider rerunning the analysis with check.na = F")
+           Maybe the assay went wrong for this group? Please consider rerunning the analysis with check.min = F")
       }
     }
 
     # Log transform df2
-    if(check.na == T){
+    if(check.min == T){
       df2[, !colSums(is.na(df2))]<-log2(df2[, !colSums(is.na(df2))])
-    } else if(check.na == F){
+    } else if(check.min == F){
       df2 <- df2 + abs(min(df2)) + 1
       df2 <- log2(df2)
     } else {
@@ -113,9 +124,9 @@ sh_full <- function(input, check.na = T, ocr = T){
 
     # Print out negative values that were excluded ####
     cat(name_df,"\n")
-    if(check.na == T){
+    if(check.min == T){
       if(length(excl) > 0){
-        cat("!Excluded due to negative values in at least one measurement: ", excl, "\n")
+        cat("!Excluded due to negative values in at least one measurement: ", unique(excl), "\n")
       }
     }
 
@@ -129,9 +140,15 @@ sh_full <- function(input, check.na = T, ocr = T){
     do.call(cat, c("\t", excl_wells))
     cat("\n","-------------------------------------------------------------------","\n")
 
+    # Save output to text file
+    if(save.out == T){
+      # Attach names to excl_wells for printout
+      names(excl_wells)<-colnames(df2)[colSums(is.na(df2)) == 0]
+      save.list <- list("Groupname"=name_df, "Excl.min"=unique(excl), "Wells"=excl_wells)
+      capture.output(str(save.list), file = save.name, append = T)
+    }
+
     # Jump to the next df surrounded by NAs
     lastPos = posNA+2
   }
 }
-
-
