@@ -18,6 +18,9 @@ sh_full <- function(input,
   # Define start position for each dataframe divided by NAs
   lastPos = 1
 
+  # If the file should be saved, this line gives it a header containing the date
+  capture.output(Sys.Date(), file = save.name, append = T)
+
   # Iterate through all dfs divided by NA columns
   for(i in colnames(df_input)[colSums(is.na(df_input)) > 0]){
 

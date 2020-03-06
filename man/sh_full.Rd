@@ -9,9 +9,9 @@ sh_full(input, check.min=T, assay="ms", save.out=F, custom, save.name="output.tx
 
   \item{check.min}{A logical value indicating whether columns containing NA values should be removed. Default TRUE}
 
-  \item{assay}{Either 'ms' for mitrostress, 'gs' for glucostress or 'custom'. Default 'ms'}
+  \item{assay}{Either 'ms' for mitrostress, 'gs' for glycolysis stress or 'custom'. Default 'ms'}
 
-  \item{save.out}{Saves the output of the analysis to a .txt document. New results will be appended to the file. Default F}
+  \item{save.out}{Saves the output of the analysis to a .txt document. New results will be appended to the file. Default FALSE}
 
   \item{custom}{Please fill in if assay = 'custom'. Has to be a numeric vector (e.g. custom = c(1:2,5:8))}
 
