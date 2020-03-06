@@ -22,7 +22,7 @@ library(SH)
 The main function of this package is sh_full() that requires a .csv file containing the measurements for each well of the groups you want to test. 
 Please make sure to export your data on the PC of the Seahorse analyser to make sure it contains a "Rate (Columns)" tab. Here, you can just copy+paste
 the OCR or ECAR groups (depending on your assay) into a new .csv file. An [example file](https://github.com/nbruse/SH/blob/master/Example.csv) is
-supplied in the repository. The different groups should be divided by an empty column and the very first row should contain the group names, the second
+supplied in the repository. Click the link, right-click on raw to save it and then just pull it into your Excel. The different groups should be divided by an empty column and the very first row should contain the group names, the second
 row well names.
 
 To run the function on your data it just requires the destination of the input file
