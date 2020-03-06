@@ -6,7 +6,7 @@ sh_full <- function(input,
                     check.min = T,
                     assay = "ms",
                     save.out = F,
-                    custom,
+                    custom = NULL,
                     save.name = "output.txt"){
 
   df_input<-read.csv2(input, header = F, row.names = 1, stringsAsFactors = F)
@@ -19,7 +19,9 @@ sh_full <- function(input,
   lastPos = 1
 
   # If the file should be saved, this line gives it a header containing the date
-  capture.output(Sys.Date(), file = save.name, append = T)
+  if(save.out == T){
+    capture.output(Sys.Date(), file = save.name, append = T)
+  }
 
   # Iterate through all dfs divided by NA columns
   for(i in colnames(df_input)[colSums(is.na(df_input)) > 0]){
@@ -52,18 +54,14 @@ sh_full <- function(input,
     }
 
     # Define df2 ####
-    if(assay == "ms"){
+    if(is.numeric(custom) == T){
+      df2 <- df[custom,]
+    } else if(assay == "ms"){
       df2 <- df[c(1:3,7:9),]
-    }else if(assay == "gs"){
+    } else if(assay == "gs"){
       df2 <- df[c(4:9),]
-    }else if(assay == "custom"){
-      if(is.numeric(custom) == T){
-        df2 <- df[custom,]
-      }else{
-        stop("Please make sure to supply a numeric vector for the custom variable.")
-      }
-    }else{
-      stop("Please make sure to choose either 'ms', 'gs' or 'custom'.")
+    } else {
+      stop("Please make sure to choose either 'ms', 'gs' or set a numeric vector for the custom argument.")
     }
 
     # Check for NAs ####
