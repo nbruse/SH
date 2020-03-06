@@ -20,7 +20,7 @@ The SH package is now available in your R studio enviroment. You can attach it t
 library(SH)
 ```
 The main function of this package is sh_full() that requires a .csv file containing the measurements for each well of the groups you want to test. 
-Please make sure to export your data on the PC of the Seahorse analyzer to make sure it contains a "Rate (Columns)" tab. Here, you can just copy+paste
+Please make sure to export your data on the PC of the Seahorse analyser to make sure it contains a "Rate (Columns)" tab. Here, you can just copy+paste
 the OCR or ECAR groups (depending on your assay) into a new .csv file. An [example file](https://github.com/nbruse/SH/blob/master/Example.csv) is
 supplied in the repository. The different groups should be divided by an empty column and the very first row should contain the group names, the second
 row well names.
@@ -39,13 +39,13 @@ you could do that by changing the function to
 ```
 sh_full("~/R/a_test_project/my_input.csv", custom = c(1,5:7))
 ```
-The function checks your wells for negative values by default. Wells containing one in at least one are disabled and not considered for the 
+The function checks your wells for negative values by default. Wells containing one in at least one measurement are disabled and not considered for the 
 calculations of mean and standard deviation. It will also warn you if there are not sufficient (<3) wells available to make the calculations.
-In this case, you could consider disabling the negative value check, by changeing the check.min argument.
+In this case, you could consider disabling the negative value check, by changing the check.min argument.
 ```
 sh_full("~/R/a_test_project/my_input.csv", check.min = F)
 ```
-Everytime you run the function, the output is directly printed to your command line. The well names correspond to the well names on your plate,
+Every time you run the function, the output is directly printed to your command line. The well names correspond to the well names on your plate,
 just like the group names. 
 ```
 Group Name: RPMI donor 1 
