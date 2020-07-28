@@ -60,7 +60,7 @@ Divergence from mean +- sd:
 	 2 2 0 3
  ------------------------------------------------------------------- 
 ```
-This output shows us that for the first group, well B04 and B02 show a high frequency of divergence (B03 even in six of six measurements)
+This output shows us that for the first group, well B02 and B04 show a high frequency of divergence (the latter even in six of six measurements)
 and that in the second group C04 contains a negative value and is therefore excluded. The results change of course if the prioritized wells 
 or the check.min argument are altered. 
 If you would like to save the output, make sure to use the save.out argument. By switching it to TRUE, the date as well as the output of each run
